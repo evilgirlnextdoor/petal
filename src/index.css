@@ -1,0 +1,83 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Cormorant Garamond', ui-serif, Georgia, serif;
+  --font-body: 'Lora', ui-serif, Georgia, serif;
+
+  --color-parchment: #f6efe3;
+  --color-linen: #fbf7f0;
+  --color-sand: #e9dcc6;
+  --color-wheat: #d8c3a0;
+  --color-terracotta: #c0663f;
+  --color-clay: #9c4a2f;
+  --color-rose: #d99a8b;
+  --color-sage: #8a9a73;
+  --color-moss: #4f5d3a;
+  --color-forest: #2f3a2a;
+  --color-plum: #5b3a5e;
+  --color-lavender: #b9a3c9;
+  --color-gold: #c9a14a;
+  --color-bark: #4a3628;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+  body {
+    @apply bg-parchment font-body text-bark antialiased;
+    background-image:
+      radial-gradient(circle at 12% 8%, rgb(185 163 201 / 0.25), transparent 40%),
+      radial-gradient(circle at 88% 20%, rgb(217 154 139 / 0.22), transparent 38%),
+      radial-gradient(circle at 50% 100%, rgb(138 154 115 / 0.22), transparent 45%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+  h1, h2, h3 {
+    @apply font-display;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-plum;
+  }
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition
+    disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility btn-primary {
+  @apply btn bg-moss text-linen shadow-sm hover:bg-forest;
+}
+@utility btn-accent {
+  @apply btn bg-terracotta text-linen shadow-sm hover:bg-clay;
+}
+@utility btn-ghost {
+  @apply btn border border-wheat bg-linen/60 text-bark hover:border-sage hover:bg-linen;
+}
+@utility input {
+  @apply w-full rounded-xl border border-wheat bg-linen/80 px-4 py-2.5 text-bark placeholder:text-bark/40
+    focus:border-sage focus:outline-none focus:ring-2 focus:ring-sage/30;
+}
+@utility card {
+  @apply rounded-3xl border border-wheat/70 bg-linen/70 shadow-[0_4px_24px_-8px_rgb(74_54_40_/_0.18)] backdrop-blur-sm;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(2deg); }
+}
+.animate-float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fade-up 0.35s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-slow, .animate-fade-up { animation: none; }
+}
